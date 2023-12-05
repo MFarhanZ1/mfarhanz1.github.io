@@ -1,0 +1,721 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Mail Server Localhost CLI Based</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="9409d140-4564-465c-a2dc-a23a69e95238" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/rijksmuseum_jan_lievens_1627.jpg" style="object-position:center 56.28999999999999%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="https://www.notion.so/icons/send_gray.svg"/></div><h1 class="page-title">Mail Server Localhost CLI Based</h1><p class="page-description"></p></header><div class="page-body"><p id="51a581cc-1f24-495a-8f65-3c84ad40241f" class="">Pada contoh kali ini kita akan menggunakan 4 packages buat mengimpelementasikan mail server pada ubuntu, packages tersebut diantara lain yakni: <mark class="highlight-purple_background">postfix, dovecot-imapd, dovecot-pop3d, dan telnet,</mark> nah sekarang mari kita ulas cara kerja antar 4 packages tersebut.</p><p id="3d56ef08-86d5-42fd-8907-c3d4c9f7cb6e" class="">Postfix, dovecot pop3d dan dovecot imapd adalah program yang digunakan untuk membuat server email di Linux. Postfix bertanggung jawab untuk mengirim dan menerima email melalui protokol SMTP (Simple Mail Transfer Protocol).<mark class="highlight-brown_background"> </mark><mark class="highlight-yellow_background">Dovecot pop3d dan dovecot imapd bertanggung jawab untuk menyimpan dan mengambil email dari server</mark> melalui protokol POP3 (Post Office Protocol 3) atau IMAP (Internet Message Access Protocol).</p><p id="f62129a9-1442-4537-99cc-cde20ad47bac" class=""><strong><a href="https://www.proweb.co.id/articles/postfix/postfix_dovecot.html">Alur kerja dari program-program ini adalah sebagai berikut</a></strong><strong>:</strong></p><div id="15db8dcc-6da5-4052-8ea4-cc2eddc9944e" class="column-list"><div id="5dd93194-46a6-4b68-bddd-9c0d1178afcf" style="width:50%" class="column"><ul id="8982e96f-9dfb-4113-83d5-1f934b521d7a" class="bulleted-list"><li style="list-style-type:disc">Pengirim email menggunakan program seperti Outlook atau Thunderbird sebagai Mail User Agent (MUA) untuk menulis dan mengirim email (bisa menggunakan telnet localhost 25 untuk melakukan ujicoba sementara).</li></ul><ul id="17230e3a-7b9b-414b-9111-185be35b8e36" class="bulleted-list"><li style="list-style-type:disc">MUA menghubungi Postfix sebagai Mail Transfer Agent (MTA) untuk mengirim email ke server tujuan melalui protokol SMTP (Simple Mail Transfer Protocol).</li></ul></div><div id="3f449a66-43f9-4e6c-a133-e5f39e97d00d" style="width:50%" class="column"><figure id="e33157d9-19b3-4f93-8c9c-b5e43376cd6e" class="image"><a href="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled.png"><img style="width:288px" src="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled.png"/></a></figure></div></div><ul id="1cb135da-51cc-49a4-9f79-6e7b2ac7e77a" class="bulleted-list"><li style="list-style-type:disc">Postfix menerima email dan memeriksa apakah alamat penerima valid atau tidak. Jika valid, Postfix menyampaikan email ke Dovecot LDA (Local Delivery Agent) untuk disimpan di server. Jika tidak valid, Postfix mengembalikan email ke pengirim dengan pesan kesalahan.</li></ul><ul id="60402157-e0c5-402c-adb9-18670c5fe23a" class="bulleted-list"><li style="list-style-type:disc">Dovecot LDA menyimpan email di sebuah folder di server sesuai dengan alamat penerima.</li></ul><ul id="9c128912-5822-42c1-bb1a-4520615bd4d4" class="bulleted-list"><li style="list-style-type:disc">Penerima email menggunakan program seperti Outlook atau Thunderbird sebagai MUA untuk membaca dan mengunduh email.</li></ul><ul id="84471037-f6a0-4c7b-acf6-d1da76abdf26" class="bulleted-list"><li style="list-style-type:disc">MUA menghubungi Dovecot pop3d atau dovecot imapd untuk mengambil email dari server melalui protokol POP3 atau IMAP.</li></ul><ul id="05e22493-7096-4338-8181-8781cb2f9144" class="bulleted-list"><li style="list-style-type:disc">Dovecot pop3d atau dovecot imapd mengirimkan email yang diminta ke MUA.</li></ul><p id="4e77e455-cbbe-47bc-ade6-186ac4f1ccdc" class="">Telnet adalah program yang digunakan untuk menguji koneksi dan komunikasi antara program-program di atas. <mark class="highlight-orange_background">Telnet dapat digunakan untuk mengirim perintah SMTP, POP3 atau IMAP secara manual dan melihat responsnya. </mark>Penjelasan lengkap tata cara menggunakan telnet akan di ulas diakhir page ini, oleh karna itu, silahkan disimak baik-baik.</p><hr id="aab796ad-5522-4f39-9125-b792dd86c322"/><p id="b6d73eab-e8de-4c90-9e32-f83ac07ab578" class=""><em><span style="border-bottom:0.05em solid">Navigation Panel of Mail Server (Postfix x Dovecot)</span></em></p><nav id="a503668d-088e-4d17-ada6-789aaed417c6" class="block-color-gray_background table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8a8a2ca8-1dab-4600-8c8d-4b30a4dc5c18">Instalasi Postfix serta Packages Pendukung</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#28105ad0-2153-4a50-9ab6-fbf0e18b50b1">Konfigurasi Postfix</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#b1281f70-ecb8-4cbd-8bcd-0d00b56978df">2.1 Konfigurasi tahap awal secara dpkg-reconfigure postfix</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d0ec9238-4bb3-47bd-91c6-d2f2a4b60c84">2.2 Konfigurasi tahap kedua secara manual dengan nano</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#90eb54bc-2ca0-4902-94ad-3c04fb4d89e7">Uji coba Postfix secara local via Telnet</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#651e65a9-aa2b-4443-baeb-f77effb49597">3.1 Cara mengirim email ke user lain</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#675bb311-230f-4e94-9352-275bf89e841d">3.2 Cara menerima email dari user lain</a></div></nav><hr id="725345da-c84b-413e-8540-d413f18b593c"/><h2 id="8a8a2ca8-1dab-4600-8c8d-4b30a4dc5c18" class="">Instalasi Postfix serta Packages Pendukung</h2><pre id="b9da8da4-25af-4dbb-92e7-b6c3b0ae7de0" class="code"><code># menginstall postfix dan packages pendukungnya
+sudo apt install postfix dovecot-imapd dovecot-pop3d -y</code></pre><p id="4a8134be-c59f-4aeb-b479-b47414d2f169" class=""><mark class="highlight-orange_background">Lalu, akan ada pop up permintaan configurasi sementara oleh postfix, begini cara mengisinya:</mark></p><ol type="1" id="61156a8f-5ae0-4644-9102-dda126c2e962" class="numbered-list" start="1"><li>Nanti akan diberikan penjelasan awal, tinggal pilih <em><span style="border-bottom:0.05em solid"><strong>OK,</strong></span></em> lalu tekan enter<figure id="2ad75dc9-6efb-469e-a3bf-0f43d268abae" class="image" style="text-align:center"><a href="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%201.png"><img style="width:384px" src="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%201.png"/></a></figure></li></ol><ol type="1" id="6fcee7e7-2f21-4485-b85e-388346e139c5" class="numbered-list" start="2"><li>Pilih <em><span style="border-bottom:0.05em solid"><strong>Internet Site</strong></span></em> karna kita akan uji coba secara local dengan telnet + localhost, lalu pilih <em><span style="border-bottom:0.05em solid"><strong>Ok</strong></span></em><figure id="24331b11-c05d-4424-b681-529dc9e30e06" class="image" style="text-align:center"><a href="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%202.png"><img style="width:384px" src="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%202.png"/></a></figure></li></ol><ol type="1" id="bef5c11d-985c-477a-b66f-ef22dc879fbd" class="numbered-list" start="3"><li>Pada system mail name, isi sembarang domain buat mail server kita, terserah aja, lalu enter aja.<figure id="d69e491e-6f6b-4303-8708-006117d662b5" class="image" style="text-align:center"><a href="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%203.png"><img style="width:384px" src="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%203.png"/></a><figcaption>misalkan disini saya mengisi <a href="http://mail.hanz.com"><code>mail.hanz.com</code></a> sebagai nama domain mail pribadi saya (gaperlu beli domain)</figcaption></figure></li></ol><p id="1dcca07d-f366-4621-b2df-2c4e89838461" class="">Dan, kelar deh, instalasi postfix beserta packages tambahan dovecot selesai terpasang di device kamu, sekarang kita tinggal melakukan langkah kedua, yakni konfigurasi ulang postfix.</p><h2 id="28105ad0-2153-4a50-9ab6-fbf0e18b50b1" class="">Konfigurasi Postfix</h2><p id="b19d0b43-9dbc-496e-a845-210feb8a05c5" class="">Agar postfix dengan lancar, kita perlu melakukan beberapa konfigurasi, secara interface dpkg postfix maupun secara manual dengan mengedit file confignya:</p><h3 id="b1281f70-ecb8-4cbd-8bcd-0d00b56978df" class="">2.1 Konfigurasi tahap awal secara dpkg-reconfigure postfix</h3><pre id="abfd326b-03a0-4d3d-9ae2-03fa37e417cd" class="code"><code># kita menjalankan command ini buat membuka interface konfigurasi postfix manual
+sudo dpkg-reconfigure postfix</code></pre><p id="77515f83-1983-4d19-b7f6-d0e721a3900b" class=""><mark class="highlight-orange_background">Lalu, akan ada pop up permintaan configurasi lebih lengkap oleh postfix, begini cara mengisinya:</mark></p><ol type="1" id="5ab5da51-ebc5-4b5e-bf8c-302a35924d9f" class="numbered-list" start="1"><li>Nanti diawal akan sama seperti <a href="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238.html">yang tertera pada tahap 1-3 pada instalasi sebelumnya</a>, kalian tetap biarkan default aja, tinggal enter-enter aja 3 kali, biarkan isinya tetap seperti yang kalian isi saat tahap awal instalasi, jangan di acak-acak.</li></ol><ol type="1" id="d1664848-65fb-4d4e-8f78-d609ea903f5b" class="numbered-list" start="2"><li>Nah, lalu di tahap ke 4 baru lah agak berbeda seperti di tahap instalasi, kalian akan menjumpai hal berikut, tinggal kalian kosongkan aja, lalu enter saja.<figure id="f48e526c-df2b-4e96-a05d-04bb6fd5d7d0" class="image" style="text-align:center"><a href="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%204.png"><img style="width:432px" src="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%204.png"/></a><figcaption>nah, tinggal kalian kosongkan aja, lalu pilih oke, dan enter.</figcaption></figure></li></ol><ol type="1" id="d007bf07-c8d5-476c-a1c1-56f8b329bdc4" class="numbered-list" start="3"><li>Lalu, pada tahapan ini kalian diminta masukan nama domain yang dituju di mail server kalian, kalian tinggal biarkan default, lalu kalian tambahkan nama domain yang udah kalian inputkan di awal tadi saat instalasi dalam contoh tadi ialah <a href="http://mail.hanz.com"><code>mail.hanz.com</code></a> lalu tambahkan juga domain lagi tanpa subdomain mail, dalam contoh ini yakni <code>hanz.com</code> (hapus subdo <del>mail.</del>hanz.com):<figure id="3863d1f9-b22f-4640-9180-944c85fd805b" class="image" style="text-align:center"><a href="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%205.png"><img style="width:432px" src="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%205.png"/></a><figcaption>bebas mau letakkan dimana (dlm contoh diatas ditarok di depan, mau di tarok di sebelah <a href="http://localhost">localhost</a> pun gapapa, asalkan dipisahkan sama tanda koma “,” nah), btw, kalau semisalnya ternyata secara default sudah tertulis domain kalian nih, itu ga perlu kalian tulis lagi, tapi kalau mau ditulis juga gapapa kayak gambar diatas, tinggal kalian enter deh setelah itu, dan kelar di tahap ini.</figcaption></figure></li></ol><ol type="1" id="c298456e-7dce-4dce-8465-269a9358fd0f" class="numbered-list" start="4"><li>Nah, nanti bakal ditanyain “Force Synchronous Update” itu kalian <strong><em><span style="border-bottom:0.05em solid">NO</span></em></strong> Kan saja, lalu enter.<figure id="e8deab90-00bf-4ba0-b4d4-2d9e2b31b8da" class="image" style="text-align:center"><a href="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%206.png"><img style="width:432px" src="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%206.png"/></a><figcaption>tinggal kalian NO kan saja, abistuh enter, kelar deh.</figcaption></figure></li></ol><ol type="1" id="fab661e7-e06f-4a95-a64c-1cbfc6e6ffc9" class="numbered-list" start="5"><li>Setelah itu kita akan melakukan specify local network yang bisa di retrieve oleh postfix, biarkan sebelumnya default, lalu kita tambahkan ujungnya <code>0.0.0.0/0</code> lihat contoh dibawah ini:<figure id="b5c6f5b5-0ee1-4a6d-9b73-218b3881fde0" class="image" style="text-align:center"><a href="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%207.png"><img style="width:432px" src="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%207.png"/></a><figcaption>kalian tinggal perlu menambahkan 0.0.0.0/0 diujung field, lalu OK kan</figcaption></figure></li></ol><ol type="1" id="5a7da0a3-a10a-443a-b7ce-bca0edce4a7a" class="numbered-list" start="6"><li>Setelah itu tinggal kalian OK kan aja pada <em><span style="border-bottom:0.05em solid">mail box size limit (default: 0)</span></em>, sama <em><span style="border-bottom:0.05em solid">local address extension character (default: +)</span></em> biarkan default semua nya, seperti dibawah ini:</li></ol><div id="dbfdb7ea-bdd2-4787-90f6-3fd7bdac20fb" class="column-list"><div id="19593ac0-f1b5-461c-b744-4398ebccbe12" style="width:50%" class="column"><figure id="ca4fb2ce-a32d-4259-ac60-c5b2d7df010c" class="image"><a href="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%208.png"><img style="width:336px" src="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%208.png"/></a></figure></div><div id="d203cbe5-8227-485a-b8e7-5eb58815f4ba" style="width:50%" class="column"><figure id="1bb7ab74-fa11-47c6-85fd-374dfd837919" class="image"><a href="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%209.png"><img style="width:336px" src="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%209.png"/></a></figure></div></div><ol type="1" id="e092c7ef-2f79-4152-84ae-6c8444d0b98a" class="numbered-list" start="7"><li>Terakhir tinggal kalian pilih opsi <em><span style="border-bottom:0.05em solid">IPV4</span></em> setelah itu tinggal kalian OK lalu enter, kelar deh semua.<figure id="f38587bd-8fac-4261-86b1-e141ba665af5" class="image" style="text-align:center"><a href="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%2010.png"><img style="width:432px" src="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%2010.png"/></a></figure></li></ol><p id="1a20514f-f233-4e30-8f0e-0ef8249b4bcb" class="">Selesai deh, postfix selesai di konfigurasi untuk tahap awal, kita akan masuk ke tahap yang kedua.</p><h3 id="d0ec9238-4bb3-47bd-91c6-d2f2a4b60c84" class="">2.2 Konfigurasi tahap kedua secara manual dengan nano</h3><p id="8f4cc1a2-44b4-48b9-b0c1-4ed41ff68597" class="">Pada tahap ini, kita akan melakukan editing 4 buah file config, yakni <code>main.cf</code>, <code>dovecot.conf</code>, <code>10-auth.conf</code>, dan terakhir <code>10-mail.conf</code>, kita mulai satu persatu pengubahannya:</p><ol type="1" id="597070c9-63e4-41dc-a26c-ac6e95d8b579" class="numbered-list" start="1"><li>Mengedit config <code>main.cf</code><pre id="3bd482e3-8e75-4e27-9eda-bbb4c72a0816" class="code"><code># membuka teks editor nano buat mengedit config di main.cf
+sudo nano /etc/postfix/main.cf</code></pre><p id="73486db1-e91d-41ec-9bf4-d6186df6dbde" class="">Pergi ke bagian paling bawah baris, lalu kalian edit isi 2 hal dibawah ini:</p><blockquote id="56b316c0-4211-4cb6-b178-d194b1297d23" class=""><strong><mark class="highlight-orange_background">myhostname</mark></strong><mark class="highlight-orange_background"> = </mark><em><mark class="highlight-orange_background">mail.hanz.com</mark></em><mark class="highlight-default"><em> </em></mark><mark class="highlight-default">(isi sesuai nama domain yang kalian buat saat instalasi)</mark><mark class="highlight-orange_background">
+</mark><strong><mark class="highlight-orange_background">home_mailbox</mark></strong><mark class="highlight-orange_background"> = </mark><em><mark class="highlight-orange_background">Maildir/</mark></em></blockquote><figure id="197e81d4-9655-41e8-b5b8-60f96481bcd1" class="image" style="text-align:center"><a href="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%2011.png"><img style="width:432px" src="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%2011.png"/></a><figcaption>lihat gambar diatas jika kalian masih ragu, biar ga salah paham.</figcaption></figure><blockquote id="77b68575-027c-489c-96df-19cffbad12e4" class="">Jika selesai, teken <strong>ctrl + o</strong> lalu <strong>enter</strong> buat menyimpan perubahan, setelah itu kalian tinggal teken <strong>ctrl + x</strong> buat keluar dari nano text editor</blockquote></li></ol><ol type="1" id="fd431d01-6b61-4fe3-8543-8026bf8fe508" class="numbered-list" start="2"><li>Mengedit config <code>dovecot.conf</code><pre id="add5e22f-06bd-4af2-9522-7a857ac7cfb0" class="code"><code># membuka teks editor nano buat mengedit config di dovecot.conf
+sudo nano /etc/dovecot/dovecot.conf</code></pre><p id="13fe74c1-8c57-4998-a610-83f8a7e14bb4" class="">tekan ctrl + w, lalu kalian cari “listen” terus itu enter, nah kalau dah ketemu kalian ubah kek gini:</p><blockquote id="a8845cc6-aeda-468a-9c2f-ad99c9c60d99" class=""><strong><mark class="highlight-orange_background">listen</mark></strong><mark class="highlight-orange_background"> = *</mark></blockquote><figure id="b13a398f-ec46-4e95-8fba-7cb37dfc624d" class="image" style="text-align:center"><a href="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%2012.png"><img style="width:432px" src="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%2012.png"/></a><figcaption>harap sesuaikan pengubahannya persis seperti gambar diatas.</figcaption></figure><blockquote id="2ebb5231-e39c-49b8-b795-ce5d4b7552e2" class="">Jika selesai, teken <strong>ctrl + o</strong> lalu <strong>enter</strong> buat menyimpan perubahan, setelah itu kalian tinggal teken <strong>ctrl + x</strong> buat keluar dari nano text editor</blockquote></li></ol><ol type="1" id="0b4d7944-6cc3-4480-8d6e-44b2e99d00f1" class="numbered-list" start="3"><li>Mengedit config <code>10-auth.conf</code><pre id="d6cfd99a-03fc-443c-a371-f1d9de1bbbf8" class="code"><code># membuka teks editor nano buat mengedit config di 10-auth.conf
+sudo nano /etc/dovecot/conf.d/10-auth.conf</code></pre><p id="932f7276-2af2-4288-961d-3bb2af817d83" class="">Kalian nanti akan meliat disable_plaintext_auth, nah kalau dah nampak kalian ubah kek gini:</p><blockquote id="18d126fe-242d-4520-bf52-49592788a61a" class=""><strong><mark class="highlight-red_background">disable_plaintext_auth</mark></strong><mark class="highlight-red_background"> = no</mark></blockquote><figure id="68d8ceb1-0a09-40e3-a6a1-2efb0ed1b2a8" class="image" style="text-align:center"><a href="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%2013.png"><img style="width:432px" src="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%2013.png"/></a><figcaption>jangan lupa setelah menghapus (#) kalian ubah value nya jadi “no”</figcaption></figure><blockquote id="eecb42e7-8b9c-48cb-af65-685a38b5e008" class="">Jika selesai, teken <strong>ctrl + o</strong> lalu <strong>enter</strong> buat menyimpan perubahan, setelah itu kalian tinggal teken <strong>ctrl + x</strong> buat keluar dari nano text editor</blockquote></li></ol><ol type="1" id="b10f7acd-cae6-4eb2-926a-a3b79abd7763" class="numbered-list" start="4"><li>Mengedit config <code>10-mail.conf</code><pre id="c2604266-058c-4157-a5c3-9e02b9ba1b60" class="code"><code># membuka teks editor nano buat mengedit config di 10-mail.conf
+sudo nano /etc/dovecot/conf.d/10-mail.conf</code></pre><p id="6cde0e50-ca6e-48d3-85cb-f3e9a268f167" class="">Tekan ctrl + w, lalu find “mail_location&quot;, nah kalau dah nampak kalian ubah kek gini:</p><blockquote id="9b54745d-6295-4119-b9ab-bba48562ce4c" class=""><mark class="highlight-red_background"><strong>remove sign (#):</strong></mark> mail_location = maildir:~/Maildir
+<mark class="highlight-teal_background"><strong>add sign (#):</strong></mark> mail_location = mbox:~/mail:INBOX=/var/mail/%u</blockquote><figure id="9c23f7eb-ea32-4912-b030-740385771a85" class="image" style="text-align:center"><a href="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%2014.png"><img style="width:432px" src="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%2014.png"/></a><figcaption>Wajib persis dengan yang ada digambar diatas, jangan beda.</figcaption></figure><blockquote id="070e0cef-acc7-400d-9779-677c0aa1acb7" class="">Jika selesai, teken <strong>ctrl + o</strong> lalu <strong>enter</strong> buat menyimpan perubahan, setelah itu kalian tinggal teken <strong>ctrl + x</strong> buat keluar dari nano text editor</blockquote></li></ol><p id="081fb474-2356-4bc3-aca4-b58c35c133a9" class="">Kelar deh semua, terakhir kita akan membuat perintah lanjutan terakhir untuk membuat direktori penyimpanan Maildir/, command nya yakni seperti dibawah ini:</p><pre id="a5118212-4422-4c02-8ae4-a1191a74abe7" class="code"><code># untuk membuat direktori penyimpanan Maildir/
+sudo maildirmake.dovecot /etc/skel/Maildir</code></pre><p id="647cc693-b136-414f-bf2e-6245cfc046ce" class="">Selesai deh proses konfigurasi postfix dan dovecot nya, sekarang kalian hanya perlu merestart service dovecot dan postfix kalian dengan 2 command berikut ini, jalankan berurutan:</p><pre id="c1a2d160-772d-4558-918b-41a9691f88ec" class="code"><code># restart kedua buah service dibawah ini dengan command berikut
+sudo service postfix restart
+sudo service dovecot restart</code></pre><p id="a8c8a92d-d79f-48e1-bd02-4ad6cc972e3b" class="">Sekarang kita akan melakukan tahap uji coba secara local dengan telnet <a href="http://localhost">localhost</a> 25 dan 110.</p><h2 id="90eb54bc-2ca0-4902-94ad-3c04fb4d89e7" class="">Uji coba Postfix secara local via Telnet</h2><p id="53fadcf7-934c-4fc5-ab07-feb13c62d223" class="">Pertama kita tambahkan dulu dua buah user baru yang akan bertindak sebagai pengirim dan penerima email nantinya, berikut caranya:</p><pre id="1a63d153-8c24-48e1-8267-9a833dffd081" class="code"><code># cara membuat user baru, isi nama_user sesuai nama yang kalian mau
+sudo adduser &lt;nama_user&gt;
+sudo adduser &lt;nama_user&gt;
+
+# misal kita akan membuat user romeo sebagai pengirim, dan juliet sebagai penerima
+sudo adduser romeo
+sudo adduser juliet
+
+&#x27;Tinggal kalian masukan password aja, wajib diingat ya, 
+ habis tuh enter aja terus biarkan kosong semua kalau diminta isi data form&#x27;</code></pre><h3 id="651e65a9-aa2b-4443-baeb-f77effb49597" class="">3.1 Cara mengirim email ke user lain</h3><pre id="8403c40e-d874-470e-b1f8-fa1483adbdc4" class="code"><code># konek ke server lokal dulu via telnet (port 25 untuk sending email)
+telnet localhost 25</code></pre><p id="cae816c6-7fd4-4fc4-959e-ae0ca79e02eb" class="">Seteleh terkoneksi, silahkan isi hal berikut pada telnet console nya, enter saat tulis tiap baris:</p><pre id="e4cddf34-8dc0-4194-8476-e0e0a5abb8bc" class="code"><code>&#x27;
+	Tuliskan satu persatu ya pada menu console telnetnya!
+	1. Setelah menulis tiap baris, tinggal tekan enter
+	2. Nanti telnet akan memberikan respons tiap kita enter
+	3. Jika respons OK berarti command anda betul, jika eror, berarti typo tuh&#x27;
+
+# tata cara penulisan pada console telnet localhost 25
+mail from: romeo
+rcpt to: juliet
+data
+&lt;your message here&gt;
+.
+quit</code></pre><p id="c9885cd9-5f34-4825-bf39-1e4726481aaf" class="">Kalau masih ragu, kamu lihat aja screenshot dibawah ini, beginilah ilustrasi praktek langsungnya:</p><figure id="5aff8fe6-5160-4609-8a4d-451fedfed132" class="image"><a href="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%2015.png"><img style="width:977px" src="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%2015.png"/></a></figure><p id="ea2ca140-7c33-4cb8-a8ff-427fe6d9c32e" class="">Kelar deh, email akan terkirim dari romeo@mail.hanz.com ke juliet@mail.hanz.com, nah begituh.</p><h3 id="675bb311-230f-4e94-9352-275bf89e841d" class="">3.2 Cara menerima email dari user lain</h3><pre id="c39714b4-4d95-448d-95bf-09449fb1c0db" class="code"><code># konek ke server lokal dulu via telnet (port 110 untuk receive email)
+telnet localhost 110</code></pre><p id="4b4856a3-4648-4ebb-96af-7f6536e7e524" class="">Seteleh terkoneksi, silahkan isi hal berikut pada telnet console nya, enter saat tulis tiap baris:</p><pre id="fb70569e-8ef5-45d1-9fe2-d2657295d39c" class="code"><code>&#x27;
+	Tuliskan satu persatu ya pada menu console telnetnya!
+	1. Setelah menulis tiap baris, tinggal tekan enter
+	2. Nanti telnet akan memberikan respons tiap kita enter
+	3. Jika respons OK berarti command anda betul, jika eror, berarti typo tuh&#x27;
+
+# tata cara penulisan pada console telnet localhost 110
+user juliet
+pass 123321
+stat # bakal kasih notif ada berapa pesan yang masuk
+rcpt 1 # ganti angka 1 dengan angka pesan nomor berapa yang mau dibaca
+quit</code></pre><p id="fddeb38c-62e6-4f00-952b-b4abb53dbdce" class="">Kalau masih ragu, kamu lihat aja screenshot dibawah ini, beginilah ilustrasi praktek langsungnya:</p><figure id="95d2677d-3217-45bb-8a06-de4faf0a5cb1" class="image"><a href="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%2016.png"><img style="width:977px" src="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238/Untitled%2016.png"/></a></figure><p id="0269a680-b939-455f-91fc-96d9f4ebd6e4" class="">Kelar deh, email dari romeo@mail.hanz.com yang tadi dikirim ke juliet@mail.hanz.com, sukses kita terima dan kita baca isi nya, yehey!</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
