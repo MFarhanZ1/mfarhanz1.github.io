@@ -1,0 +1,729 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Web Server</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="f5b6cbec-61ca-4d55-bc53-f72b395800a3" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/rijksmuseum_jan_lievens_1627.jpg" style="object-position:center 56.28999999999999%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="https://www.notion.so/icons/globe_green.svg"/></div><h1 class="page-title">Web Server</h1><p class="page-description"></p></header><div class="page-body"><p id="b77809e2-3559-4326-8e4a-d2794d2c6a81" class="">Apache HTTP Server, atau yang lebih dikenal sebagai Apache, adalah p<mark class="highlight-teal_background">erangkat lunak server web open-source yang sangat populer.</mark> Pada sistem operasi Ubuntu, Apache sering kali digunakan sebagai web server utama karena kemudahan penggunaannya <mark class="highlight-yellow_background">dan kemampuan yang solid dalam menangani permintaan web.</mark></p><p id="7df8ad99-4de1-466f-9491-40a47959f568" class="">Berikut adalah beberapa poin tentang Apache HTTP Server pada Ubuntu:</p><ol type="1" id="1d7597e2-3f1f-4388-8b29-d46d8191b74a" class="numbered-list" start="1"><li><strong>Server Web</strong>: Apache berperan sebagai server web yang mengelola permintaan HTTP dari klien (seperti browser web) dan memberikan konten yang diminta, seperti halaman web, gambar, file CSS, JavaScript, dan berbagai konten web lainnya.</li></ol><ol type="1" id="7d58addd-d7ce-4327-9601-2e4b58e37012" class="numbered-list" start="2"><li><strong>Open Source</strong>: Apache adalah perangkat lunak open-source, artinya kode sumbernya dapat diakses, dimodifikasi, dan didistribusikan kembali sesuai dengan lisensi yang berlaku.</li></ol><ol type="1" id="63a37b95-4b8c-4b41-9994-a58c89ef12d7" class="numbered-list" start="3"><li><strong>Konfigurasi</strong>: Apache memiliki file konfigurasi utama bernama <code>httpd.conf</code> yang berada di dalam direktori <code>/etc/apache2</code> (lokasi default di Ubuntu). Di sini, administrator dapat mengatur berbagai aspek server web, termasuk port yang digunakan, direktori default untuk file web, modul yang diaktifkan, dan banyak lagi.</li></ol><ol type="1" id="b1c0c57f-7248-4d10-9579-a642b94ba4ae" class="numbered-list" start="4"><li><strong>Modularitas</strong>: Apache memungkinkan penggunaan modul tambahan yang dapat diaktifkan atau dinonaktifkan sesuai kebutuhan. Modul ini memperluas fungsionalitas Apache, seperti pengompresi data, keamanan, integrasi dengan bahasa pemrograman tertentu (seperti PHP), dan banyak lagi.</li></ol><ol type="1" id="bbd15569-6fd2-4cfd-86de-6125547b8465" class="numbered-list" start="5"><li><strong>Performa dan Stabilitas</strong>: Apache terkenal akan kehandalan, kestabilan, dan kinerjanya yang baik dalam menangani lalu lintas web yang besar. Dengan konfigurasi yang tepat, Apache dapat menangani banyak permintaan secara bersamaan dengan efisien.</li></ol><ol type="1" id="afb32291-d041-406d-90b5-72a50cac09c7" class="numbered-list" start="6"><li><strong>Dukungan Komunitas yang Luas</strong>: Karena popularitasnya yang besar, terdapat sumber daya yang kaya dalam bentuk dokumentasi, forum, dan komunitas yang dapat membantu dalam mengatasi masalah dan memberikan saran terkait penggunaan Apache.</li></ol><p id="77529ee7-6427-4316-8322-82821c40290a" class="">Dengan menggunakan Apache sebagai web server pada sistem Ubuntu, pengguna dapat menyajikan <mark class="highlight-red_background">konten web dengan aman dan dapat diandalkan,</mark> serta memiliki kontrol yang kuat terhadap konfigurasi dan penyesuaian berbagai fitur server web sesuai kebutuhan mereka.</p><hr id="48aea0b4-0d5e-464c-b6f1-76e023e296cd"/><p id="46147e58-91f1-41d8-a224-27f45b9a6784" class=""><em><span style="border-bottom:0.05em solid">Navigation Panel of Web Server Apache2</span></em></p><nav id="25285b59-e5ab-4128-80bb-5f417f1137ec" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1ed742a4-8407-40ce-afff-3fdf920e89de">Instlasi Web Server (Apache Web Server)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#fa50914d-6d09-4b27-a479-99d04bbcd35b">Setting &amp; Config Apache SSL Self Signed Certified Authority</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6814e930-2539-49b4-bb35-30686afe0c89">Pengujian Akses Website dengan Client Certificate</a></div></nav><hr id="1ceb3248-24cb-4547-a16a-efa872213a66"/><h2 id="1ed742a4-8407-40ce-afff-3fdf920e89de" class="">Instlasi Web Server (Apache Web Server)</h2><p id="b8ca4725-b2f3-44ed-8e65-86e7fba6125b" class="">Untuk menginstal Apache Web Server di Ubuntu, Anda dapat mengikuti langkah-langkah berikut menggunakan terminal:</p><ol type="1" id="90c4e8c8-ae0b-498f-b5ec-a33fa09b9f3b" class="numbered-list" start="1"><li><strong>Update Paket yang Tersedia</strong>:
+Sebelum menginstal Apache, pastikan paket yang tersedia dalam sistem Ubuntu sudah diperbarui. Jalankan perintah berikut:<pre id="f230e1a5-785e-44d5-a1f5-4e7edb1b5a41" class="code code-wrap"><code>sudo apt update
+sudo apt upgrade</code></pre></li></ol><ol type="1" id="3a706929-ca4c-4dd1-8b2c-230f40c6fa41" class="numbered-list" start="2"><li><strong>Instal Apache</strong>:
+Setelah memperbarui paket, instal Apache dengan menjalankan perintah:<pre id="31a673c6-973f-47f5-b2e7-7b4b8441bce2" class="code code-wrap"><code>sudo apt install apache2</code></pre></li></ol><ol type="1" id="454281af-b2d2-4e4b-ad92-01b37bcedfb1" class="numbered-list" start="3"><li><strong>Verifikasi Status Apache</strong>:
+Setelah proses instalasi selesai, cek status Apache untuk memastikan bahwa layanan telah berhasil diinstal dengan baik. Gunakan perintah:<pre id="17622742-d458-4042-a32e-a34f633f8062" class="code code-wrap"><code>sudo systemctl status apache2</code></pre><p id="a92330c8-0a4c-4418-83d4-6c92cb75924a" class="">Jika layanan Apache berjalan dengan baik, Anda akan melihat pesan yang menyatakan bahwa Apache sedang berjalan.</p></li></ol><ol type="1" id="3bc84091-8666-455e-a15d-d3d3d92bdd5d" class="numbered-list" start="4"><li><strong>Buat Web Directory Root &amp; Add Nama Domain Baru</strong><p id="c4cec194-416d-4372-bf74-6670df575cce" class="">Agar service apache dapat diakses dengan mengetikan nama domain kita yang sudah dibuat ngasal kemarin, kita harus melakukan beberapa tahapan konfigurasi tambahan, diantaranya, pertama kita harus membuat direktori tempat dimana folder akan dibaca saat web kita diakses , lalu kita akan mengedit <code>/etc/hosts</code> untuk menambahkan penamaan dns jaringan baru. </p><pre id="95a1e620-4107-46b9-a4b9-46c85f743f98" class="code"><code># membuat folder khusus untuk menampung file pada website kita nantinya seperti html, css, dll
+sudo mkdir /var/www/hanz-ssl.com # ini lah tempat DocumentRoot alias tempat dimana folder dibaca saat web diakses
+
+# membuka nano text editor untuk mengedit file hosts
+sudo nano /etc/hosts</code></pre><p id="c4ec8037-f242-43c4-945a-49cd3eb2cdf4" class="">pastikan configurasi kalian sesuai dengan gambar dibawah ini, ubah domain sesuai domain name yang kalian pengen buat, terserah aja bro, kalau dibawah saya membuat domain dengan nama <a href="http://hanz-ssl.com"><code>hanz-ssl.com</code></a> sesuaikan dengan nama directory yang udah kita buat di atas yak biar enak aja sih, kalo ragu boleh lihat baik-baik ss dibawah ini:</p><figure id="3d202a6e-ff61-4c1a-bf1e-60eb1bb85739" class="image" style="text-align:center"><a href="Web%20Server%20f5b6cbec61ca4d55bc53f72b395800a3/Untitled.png"><img style="width:364px" src="Web%20Server%20f5b6cbec61ca4d55bc53f72b395800a3/Untitled.png"/></a><figcaption>bikin ip nya 127.0.1.1 lalu teken tab, dan masukin nama domain yang kita buat bebas, domain ini yang nantinya akan kita gunakan pada setting ssl sampe selesai, jadi inget inget yah gaes, jangan sampe lupa brow.</figcaption></figure><blockquote id="dc71f6fb-000c-43d8-a848-8c724b8bb2bb" class="">Jika selesai, teken <strong>ctrl + o</strong> lalu <strong>enter</strong> buat menyimpan perubahan, setelah itu kalian tinggal teken <strong>ctrl + x</strong> buat keluar dari nano text editor</blockquote></li></ol><ol type="1" id="06893474-0c4a-4f30-a01d-47928d080494" class="numbered-list" start="5"><li><strong>Uji Coba Akses Web Server</strong>:
+Buka browser web dan masukkan alamat IP server Ubuntu atau <code>localhost</code> atau nama domain yang udah kita buat yakni <code><a href="http://hanz-ssl.com">hanz-ssl.com</a></code> (jika Anda menginstal Apache di komputer lokal) ke dalam bar alamat. Jika Apache telah berhasil diinstal, Anda akan melihat halaman selamat datang Apache, yang menunjukkan bahwa server web sedang berjalan.</li></ol><ol type="1" id="3a97db44-6d09-46dd-bb7b-7bea5dba0128" class="numbered-list" start="6"><li><strong>Konfigurasi Firewall (Opsional)</strong>:
+Jika Anda menggunakan firewall pada server, pastikan port 80 (port default untuk HTTP) dibuka agar pengguna dapat mengakses web server. Gunakan perintah:<pre id="03364839-7c59-49c6-b9c1-8f4efd8fe365" class="code code-wrap"><code>sudo ufw allow &#x27;Apache&#x27;
+sudo ufw allow &#x27;Apache Full&#x27;</code></pre></li></ol><p id="3b44d4a1-9b94-4b05-99b7-5a468b69f533" class="">Dengan mengikuti langkah-langkah ini, Anda akan berhasil menginstal dan menjalankan Apache Web Server di sistem Ubuntu Anda. Pastikan untuk memeriksa dokumentasi resmi Apache untuk konfigurasi lebih lanjut dan pengaturan tambahan sesuai dengan kebutuhan Anda.</p><h2 id="fa50914d-6d09-4b27-a479-99d04bbcd35b" class="">Setting &amp; Config Apache SSL Self Signed Certified Authority</h2><p id="4a29919a-c1a3-47e6-a369-ce6ad00f7729" class=""><mark class="highlight-teal_background">Step 1 - Aktifkan SSL Module: </mark><em><mark class="highlight-teal_background">Aktifkan SSL &amp; restart apache</mark></em><div class="indented"><pre id="b7ddc5d8-ff52-4e8f-ac05-8ce887281b95" class="code code-wrap"><code>sudo a2enmod ssl
+sudo service apache2 restart</code></pre></div></p><p id="ad4205b5-ab07-43f3-928d-52b3bf6c445b" class=""><mark class="highlight-orange_background">Step 2 - buat self-sign SSL certificate: </mark><mark class="highlight-orange_background"><em>Buat folder SSL &amp; buat self-signed certificate</em></mark><div class="indented"><pre id="81c423d9-4c51-49f2-b909-9ac412ad28ac" class="code code-wrap"><code>sudo mkdir /etc/apache2/ssl
+sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/apache2/ssl/apache.key -out /etc/apache2/ssl/apache.crt</code></pre><p id="2b55fff5-e523-4651-a70e-6d81139cb9d5" class="">Artinya</p><ul id="650fe75c-7cb3-4ab2-a12f-048308e412e5" class="bulleted-list"><li style="list-style-type:disc">openssl - perintah untuk operasi SSL</li></ul><ul id="1c8007d7-4979-467d-b2fc-9e9501219fd9" class="bulleted-list"><li style="list-style-type:disc">req - X.509 certificate signing request (CSR)</li></ul><ul id="8aea974b-ad64-4e62-8d23-3437dc264fe3" class="bulleted-list"><li style="list-style-type:disc">X.509 - self-signed tanpa certified auth (biar gratis)</li></ul><ul id="fdfcef5d-6f29-4280-acd4-3001de739ae9" class="bulleted-list"><li style="list-style-type:disc">nodes - berarti key file tidak perlu di amankan dengan passphrase</li></ul><ul id="70aa5984-83c7-45f7-bd2f-64eb804a8f0f" class="bulleted-list"><li style="list-style-type:disc">days 365 - durasi key tersebut valid, dimana dalam contoh ini yakni 1 tahun</li></ul><ul id="782f1fd0-ed99-498f-8c44-0375ffce4888" class="bulleted-list"><li style="list-style-type:disc">newkey rsa:2048: buat CSR dan private key bersamaan. RSA key panjangnya 2048 bit.</li></ul><ul id="1a72c2b6-86ac-4e21-af8b-2f5c8178e842" class="bulleted-list"><li style="list-style-type:disc">keyout: nama output file dari private key yang dibuat.</li></ul><ul id="d497ddc9-2d1a-4ea1-9f60-409c562c272f" class="bulleted-list"><li style="list-style-type:disc">out: nama output file certificate digital yang dibuat.</li></ul><p id="47256a3d-affd-49a5-81c0-2d3870dcda62" class="">Setelah tekan <em><span style="border-bottom:0.05em solid"><strong>&quot;ENTER&quot;,</strong></span></em> ada beberapa pertanyaan atau jawaban yang perlu dilakukan dalam proses, diantaranya yakni,</p><pre id="6f06565e-edc0-4b87-87d8-5f10aea58ab2" class="code code-wrap"><code>Country Name (2 letter code) [AU]:ID
+State or Province Name (full name) [Some-State]:Riau
+Locality Name (eg, city) []:Pekanbaru
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Hanz Cert Auth Ltd
+Organizational Unit Name (eg, section) []:Hanz Dept. of CA Ultimate Service
+Common Name (e.g. server FQDN or YOUR name) []:hanz-ssl.com
+Email Address []:support@hanz-ssl.com</code></pre><p id="532aa541-a772-4d73-998b-072ab58dcc56" class="">Sertificate &amp; key akan di letakan di directory <code>/etc/apache2/ssl</code></p></div></p><p id="173a3f89-15d7-4a13-ae74-74d28ec71148" class=""><mark class="highlight-blue_background">Step 3 - Konfigurasi Apache untuk menggunakan SSL</mark></p><pre id="0349469d-a8cb-4ce4-bb41-9c73d987eb76" class="code code-wrap"><code># kita akan mengcopy kan dulu file konfig default bawaan dari apache ssl
+sudo cp -r /etc/apache2/sites-available/default-ssl.conf /etc/apache2/sites-available/hanz-ssl.conf
+
+# lalu kita perlu memperbarui konfigurasinya, edit dengan nano text editor
+sudo nano /etc/apache2/sites-available/hanz-ssl.conf</code></pre><p id="86449f07-99f2-45e3-bd84-c057092b368f" class="">Tampilan file sebelum di edit adalah sebagai berikut,</p><pre id="0ee03a13-0a29-41db-9dd3-432125002e79" class="code code-wrap"><code>&lt;IfModule mod_ssl.c&gt;
+    &lt;VirtualHost _default_:443&gt;
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/html
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+        SSLEngine on
+        SSLCertificateFile /etc/ssl/certs/ssl-cert-snakeoil.pem
+        SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+        &lt;FilesMatch &quot;\.(cgi|shtml|phtml|php)$&quot;&gt;
+                        SSLOptions +StdEnvVars
+        &lt;/FilesMatch&gt;
+        &lt;Directory /usr/lib/cgi-bin&gt;
+                        SSLOptions +StdEnvVars
+        &lt;/Directory&gt;
+        BrowserMatch &quot;MSIE [2-6]&quot; \
+                        nokeepalive ssl-unclean-shutdown \
+                        downgrade-1.0 force-response-1.0
+        BrowserMatch &quot;MSIE [17-9]&quot; ssl-unclean-shutdown
+    &lt;/VirtualHost&gt;
+&lt;/IfModule&gt;</code></pre><p id="279a3d1d-de59-4348-9f60-957fbc6cda04" class="">Hal yang perlu kita ubah di file tersebut, yakni:<div class="indented"><ul id="507d8623-f80c-4c8f-8d62-985b46cfb0c5" class="bulleted-list"><li style="list-style-type:disc">ServerAdmin (boleh di ubah, boleh juga engga kok)</li></ul><ul id="2bc8b615-1790-4c40-937a-f3565213312e" class="bulleted-list"><li style="list-style-type:disc">ServerName (belum ada di file default, jadi kita tambahkan manual)</li></ul><ul id="17cbac48-e50d-4ea8-b7e8-9dc90678a986" class="bulleted-list"><li style="list-style-type:disc">ServerAlias (belum ada di file default, jadi kita tambahkan manual)</li></ul><ul id="7bcbd541-f1ae-4c7d-9f2e-040740b9da72" class="bulleted-list"><li style="list-style-type:disc">DocumentRoot (ini <mark class="highlight-red_background">*wajib,</mark> samakan dengan <a href="Web%20Server%20f5b6cbec61ca4d55bc53f72b395800a3.html">folder yang dah kita buat di tahap sebelumnya</a>)</li></ul></div></p><p id="88b7bef5-8459-45a2-9ca4-b8bb68dd0b18" class="">Lihat gambar dibawah ini kalau misalnya kalian masih ragu:</p><figure id="e956d5b4-d95c-43cf-8efc-2e62ad79e2be" class="image"><a href="Web%20Server%20f5b6cbec61ca4d55bc53f72b395800a3/Untitled%201.png"><img style="width:528px" src="Web%20Server%20f5b6cbec61ca4d55bc53f72b395800a3/Untitled%201.png"/></a></figure><p id="9e7033d4-04a5-4300-b639-4bf3dc37415c" class="">Lalu, kita memerlukan mengedit path folder dimana kita meletakan sertifikat dan key:<div class="indented"><ul id="5c9dc0d3-f787-49f4-b77c-5de05bc17f82" class="bulleted-list"><li style="list-style-type:disc">Pastikan SSLEngine on agar fitur SSL pada apache2 aktif berjalan</li></ul><ul id="0bcb0714-ddf4-4bb8-b314-7c2eea824ea7" class="bulleted-list"><li style="list-style-type:disc">Ubah lokasi SSL Certificate file sesuai yang kita generate tadi</li></ul><ul id="4c6c7196-e179-4824-b580-8b7975c5c0c9" class="bulleted-list"><li style="list-style-type:disc">Ubah lokasi SSL Private Key sesuai juga sama yang kita generate diawal tadi</li></ul></div></p><p id="3cf470a9-5e24-4e4b-bb18-252b5f5819a3" class="">Lihat gambar dibawah ini kalau misalnya kalian masih ragu juga:</p><figure id="1a0bf57d-a98f-4dd1-8d7c-84229b019cda" class="image"><a href="Web%20Server%20f5b6cbec61ca4d55bc53f72b395800a3/Untitled%202.png"><img style="width:528px" src="Web%20Server%20f5b6cbec61ca4d55bc53f72b395800a3/Untitled%202.png"/></a></figure><blockquote id="fe2aeb1d-0408-4d90-90b7-a57af3aa97a0" class="">Jika selesai, teken <strong>ctrl + o</strong> lalu <strong>enter</strong> buat menyimpan perubahan, setelah itu kalian tinggal teken <strong>ctrl + x</strong> buat keluar dari nano text editor</blockquote><p id="930cbfe2-6a20-43de-a610-5dfb10d932c0" class=""><mark class="highlight-red_background">Step 4 - Sekarang kita isi dulu file.html pada folder ‘DocumentRoot’ kita sebagai landing page</mark></p><pre id="0e39e86e-1c52-4d41-8fd8-d66704bbdd87" class="code code-wrap"><code># wajib disamakan dengan nama path yang dibikin di &#x27;DocumentRoot&#x27; Sebelumnya
+sudo nano /var/www/hanz-ssl.com/index.html</code></pre><p id="4b5eb9bd-dad9-4481-9083-18b0cc3ef243" class="">Nah, lalu kalian isikan script html sederhana seperti ini:</p><pre id="4d3f2f78-e13f-4f32-8062-acee1e22bca9" class="code"><code>&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Welcome to tes ssl!&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Success! uji coba tes ssl!&lt;/h1&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code></pre><blockquote id="ae3827a8-6a2a-409d-b636-c9e8c952d59e" class="">Jika selesai, teken <strong>ctrl + o</strong> lalu <strong>enter</strong> buat menyimpan perubahan, setelah itu kalian tinggal teken <strong>ctrl + x</strong> buat keluar dari nano text editor</blockquote><p id="60eb93ae-98c0-4e2b-8ccc-ec14ee422a72" class=""><mark class="highlight-red_background">Step 5 - Aktifkan SSL Virtual Host:</mark><em><mark class="highlight-red_background"> Enable SSL virtual host &amp; reload apache, tinggal ketik</mark></em></p><pre id="369e4146-1e00-42f7-a95a-109b19a2d954" class="code code-wrap"><code>sudo a2ensite default-ssl.conf
+sudo service apache2 restart</code></pre><h2 id="6814e930-2539-49b4-bb35-30686afe0c89" class="">Pengujian Akses Website dengan Client Certificate</h2><p id="c62a97bf-abf3-4aee-8cb9-59cb0562f7eb" class="">Sekarang kita akan melakukan uji coba mengakses website kita untuk mengecek apakah ssl/tls berhasil terpasang atau tidak di web server kita, caranya gampang:</p><pre id="b08ef613-0f4f-4b5c-a9c9-c1f2200c5389" class="code code-wrap"><code># kalian hanya perlu menambahkan https:// didepan alamat web yang kalian buat
+https://hanz-ssl.com</code></pre><p id="8dd979e6-c1e2-4cb8-968d-1da35291369e" class="">Nah, nanti diawal anda akan memperoleh warning karena menggunakan self-signed certificate hal ini disebabkan <mark class="highlight-red_background">karna sertifikat digital anda ditanda tangani oleh diri anda sendiri</mark> bukan dari perusahaan autoritas sertifikat. Ini tidak apa-apa kok, tinggal kalian klik advance, lalu oke kan aja, selesai deh</p></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>

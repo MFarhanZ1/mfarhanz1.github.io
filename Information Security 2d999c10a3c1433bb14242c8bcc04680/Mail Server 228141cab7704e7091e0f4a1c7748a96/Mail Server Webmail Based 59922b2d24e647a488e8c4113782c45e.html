@@ -1,0 +1,725 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Mail Server Webmail Based</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-uiBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+.select-value-color-pageGlass { background-color: undefined; }
+.select-value-color-washGlass { background-color: undefined; }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="59922b2d-24e6-47a4-88e8-c4113782c45e" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/met_camille_pissarro_1896.jpg" style="object-position:center 40%"/><div class="page-header-icon page-header-icon-with-cover"><img class="icon" src="https://www.notion.so/icons/send_gray.svg"/></div><h1 class="page-title">Mail Server Webmail Based</h1><p class="page-description"></p></header><div class="page-body"><p id="c4471a16-4452-4468-8d92-86f68ab71986" class=""><mark class="highlight-teal_background">SquirrelMail adalah</mark> salah satu aplikasi webmail yang populer yang dirancang untuk dijalankan di server web. Ini memungkinkan pengguna <mark class="highlight-yellow_background">untuk mengakses kotak surat email mereka melalui antarmuka web yang sederhana dan mudah digunakan.</mark> SquirrelMail sering kali digunakan sebagai solusi webmail di server Linux, termasuk Ubuntu.</p><p id="8bbaf39e-171e-4d66-af5b-a206e78cdbb1" class="">Berikut adalah beberapa poin tentang SquirrelMail:</p><ol type="1" id="89ee5e17-bf7d-4031-b4f4-7d4a5b031c6b" class="numbered-list" start="1"><li><strong>Antarmuka Pengguna Web</strong>: SquirrelMail menyediakan antarmuka web yang bersahabat dan mudah digunakan, memungkinkan pengguna untuk membaca, mengirim, dan mengelola email mereka melalui browser web.</li></ol><ol type="1" id="417b852b-9be1-4c86-b9eb-8c09a1afe94a" class="numbered-list" start="2"><li><strong>Ringan dan Mudah Dipasang</strong>: Aplikasi ini terkenal karena kesederhanaannya dan persyaratan sistem yang ringan. Hal ini memungkinkan SquirrelMail diinstal dan berjalan di server dengan sumber daya yang terbatas.</li></ol><ol type="1" id="d720a634-eca3-4218-8511-4e4f43362e32" class="numbered-list" start="3"><li><strong>Kemampuan Kustomisasi</strong>: Meskipun sederhana, SquirrelMail memiliki beberapa fitur kustomisasi yang memungkinkan administrator untuk menyesuaikan tampilan dan fungsionalitasnya sesuai kebutuhan.</li></ol><ol type="1" id="2fb94266-f724-4cb7-9fd4-ae9bd0afc922" class="numbered-list" start="4"><li><strong>Dukungan Protokol</strong>: SquirrelMail mendukung protokol email umum seperti POP3 dan IMAP, memungkinkan pengguna untuk mengakses email dari server yang mendukung protokol tersebut.</li></ol><ol type="1" id="a509e31b-17cf-4537-b91a-b7d787546932" class="numbered-list" start="5"><li><strong>Open Source</strong>: Sebagai perangkat lunak open-source, SquirrelMail memiliki kode sumber yang terbuka, yang memungkinkan pengembang untuk memodifikasinya dan mengadaptasinya sesuai kebutuhan mereka.</li></ol><ol type="1" id="ba680637-fa77-4c0f-979b-2a16c69d1b0d" class="numbered-list" start="6"><li><strong>Tidak Berkembang Lagi</strong>: Perlu dicatat bahwa SquirrelMail sekarang tidak lagi mendapatkan pengembangan aktif. Meskipun masih banyak digunakan, beberapa organisasi lebih memilih solusi webmail yang lebih baru dan didukung secara aktif seperti Roundcube atau RainLoop.</li></ol><p id="78c8000b-5b3c-4ec1-ae5a-90da9eb02a1d" class="">Sekedar informasi, SquirrelMail sudah tak lagi tersedia di ubuntu apt package manager, oleh karna itu untuk megunduh <mark class="highlight-orange_background">dan menginstallnya kita memerlukan cara lain,</mark> yakni menggunakan wget, untuk ulasan lebih lengkapnya akan di ulas pada sub-bab instalasi squirrelmail.</p><hr id="92596d86-e668-46fb-80bf-08a072851e05"/><p id="50a43b52-7762-4d70-a292-b9ccf3c82c35" class=""><em><span style="border-bottom:0.05em solid">Navigation Panel of Mail Server (Squirrel-Mail)</span></em></p><nav id="810ed3b5-460c-45f2-8691-c0c84ce170cc" class="block-color-gray_background table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d4e9c974-ce72-4d71-bcd7-76e591cf17f5">Instalasi Squirrel-Mail</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c454b980-5266-4950-b4a6-6a59f82703c0">Konfigurasi Squirrel-Mail</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#5af6e3ac-0dba-4032-b950-c839bee8882c">2.1 Konfigurasi Tambahan Khusus Buat Squirrel-Mail di Ubuntu 16.04+</a></div></nav><hr id="67088414-3c31-41d8-a757-170604a1c346"/><h2 id="d4e9c974-ce72-4d71-bcd7-76e591cf17f5" class="">Instalasi Squirrel-Mail</h2><p id="43c842ca-0fe3-4bf0-98a7-c8e2c3acef2f" class="">Pastikan sebelum masuk ke instalasi Squirrel mail anda <em><span style="border-bottom:0.05em solid"><strong>wajib</strong></span></em> telah mengikuti <a href="Mail%20Server%20Localhost%20CLI%20Based%209409d1404564465ca2dca23a69e95238.html">semua langkah yang terdapat pada instalasi webmail localhost cli based,</a> jika belum <mark class="highlight-orange_background">silahkan ikuti dulu panduan instalasi dan konfigurasi semua packages nya, barulah anda bisa melanjutkan ke tahap squirrel-mail ini bro.</mark> </p><p id="09e890d3-59de-4f20-a662-fa7e5bb249d6" class="">Okey, kita masuk ke pembahasan Squirrel-Mail, sekedar informasi nih, <mark class="highlight-yellow_background">Squirrel-Mail sudah tak tersedia lagi di ubuntu versi 16.04 keatas,</mark> untuk menyiasatinya, kita dapat mengunduhnya dengan perintah wget serta unzip untuk mengekstraknya:</p><pre id="735a310d-07ad-4be8-aaf6-c501929670d0" class="code"><code># menginstall wget dan unzip sebagai tools penginstall squirrel-mail
+sudo apt install wget
+sudo apt install unzip
+
+# mengunduh squirrelmail melalui wget (squirrelmail sudah tak tersedia di apt)
+cd ~/Downloads/ &amp;&amp; sudo wget https://sourceforge.net/projects/squirrelmail/files/stable/1.4.22/squirrelmail-webmail-1.4.22.zip
+
+# mengekstrak squirrelmail yang telah di download tadi
+# nanti akan muncul folder &#x27;squirrelmail-webmail-1.4.22/&#x27; disinilah hasil ekstrak tadi
+unzip squirrelmail-webmail-1.4.22.zip 
+
+# lalu kita buat folder di folder apache2 untuk menyimpan data dari squirrelmail
+sudo mkdir /var/www/mail
+
+# kita copy kan hasil ekstrak tadi ke folder dalam apache2 yang udah kita buat tadi
+sudo cp -r squirrelmail-webmail-1.4.22/ /var/www/mail/squirrelmail
+
+# lalu kita ubah folder ownershipnya, dan add permission nya
+sudo chown -R www-data:www-data /var/www/mail/squirrelmail/
+sudo chmod 755 -R /var/www/mail/squirrelmail/</code></pre><p id="164b4d3f-337b-49c9-bb5d-ab0a78032020" class="">Kelar deh instalasi manual dari squirrelmail, sekarang kita akan masuk ke tahap selanjutnya, yakni tahap konfigurasi squirrelmail via apache, simak lanjutannya dibawah ini.</p><h2 id="c454b980-5266-4950-b4a6-6a59f82703c0" class="">Konfigurasi Squirrel-Mail</h2><p id="79760abc-b21d-4f56-af57-d629501b3ab2" class="">Agar Squirrel-Mail dapat berjalan kita harus melakukan beberapa tahapan konfigurasi, diantaranya, pertama kita harus mengedit <code>/etc/hosts</code> untuk menambahkan penamaan dns jaringan baru. </p><pre id="a59f47fa-2884-45f7-bac7-2bc729412fd7" class="code"><code># membuka nano text editor untuk mengedit file hosts
+sudo nano /etc/hosts</code></pre><p id="90f964a9-1c67-45b4-84b3-b53def83d5e3" class="">pastikan configurasi kalian sesuai dengan gambar dibawah ini, ubah domain sesuai domain name yang kalian inputkan pada saat konfigurasi postfix tahap awal, lihat baik-baik ss dibawah ini:</p><figure id="dfa7e3ba-645c-4d8b-a50a-cbbf098176eb" class="image"><a href="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled.png"><img style="width:361px" src="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled.png"/></a><figcaption>bikin ip nya 127.0.1.1 lalu teken tab dan masukin nama domain yang kita buat saat instalasi postfix pas diawal banget tuh, inget inget yah gaes.</figcaption></figure><blockquote id="56bf7f29-a6fd-4d96-a78e-081831024f9b" class="">Jika selesai, teken <strong>ctrl + o</strong> lalu <strong>enter</strong> buat menyimpan perubahan, setelah itu kalian tinggal teken <strong>ctrl + x</strong> buat keluar dari nano text editor</blockquote><p id="4843557d-3c66-4913-8543-28648f3a3932" class="">Lalu kita akan melakukan penambahan config baru didalam folder <code>/etc/apache2/sites-available</code> kita harus mengcopykan file <code>000-default.conf</code> ke dalam folder yang sama menjadi nama file baru yakni <code>mail.conf</code> berikut one-line command singkatnya:</p><pre id="c7c39293-779c-4962-b75c-11b86dc7b846" class="code"><code># penambahan config baru dengan cara mengcopykan template file default.conf menjadi nama file config baru
+cd /etc/apache2/sites-available &amp;&amp; sudo cp 000-default.conf mail.conf</code></pre><p id="cee2002f-5613-47f1-a69d-ef6260cfa331" class="">nah ges, barulah muncul <code>mail.conf</code> itulah yang nanti akan kita edit isinya, pertama kita akan buka terlebih dahulu nano text editor untuk memperbarui isi file <code>mail.conf</code> tersebut, berikut caranya:</p><pre id="e4d031d6-2dfa-4549-84fe-4dc18d1e4d0b" class="code"><code># membuka nano text editor buat mengedit isi file mail.conf
+sudo nano mail.conf</code></pre><p id="aa6a62dd-952e-45ae-9549-21ccfe6995e1" class="">Hal yang akan kita ubah disini yakni hanya 2 saja, yaitu ServerName dengan DocumentRoot, lihat gambar dibawah, pastikan sesuai, lihat penjelasan dibawah gambar agar tidak misskom kalian:</p><figure id="09b45edd-a49a-4c28-9438-15777d3eec18" class="image"><a href="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%201.png"><img style="width:432px" src="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%201.png"/></a><figcaption>Pada ServerName samakan dengan nama domain yang kalian inputkan saat kalian menambahkan di /etc/hosts tadi, lalu DocumentRoot buat seperti digambar: /var/www/mail/squirrelmail</figcaption></figure><p id="1771d709-214e-40b6-8507-f40556d1a913" class="">Nah, setelah itu kita akan memberitahu kepada apache2 bahwa config <code>mail.conf</code> telah aktif sekarang, tujuannya agar bisa di akses nama domain virtual tersebut. Kita juga harus mematikan config default dari apache2 agak tidak bentrok berjalan keduanya, dan diakhir kita akan merestart service dari apache2, simak langkah-langkahnya dibawah ini yak ges:</p><pre id="b03f3817-2f5a-4376-bbb3-98bf6a901e8e" class="code"><code># hidupkan mail.conf dengan a2ensite, dan matikan default conf dengan a2ensite conf
+sudo a2ensite mail.conf
+sudo a2dissite 000-default.conf
+
+# reload dan restart service dari apache2 agar perubahan terbaca
+sudo systemctl reload apache2
+sudo systemctl restart apache2</code></pre><p id="3eb98123-d6f1-4f46-8b87-b60505154268" class="">Terakhir kita akan lakukan config squirrelmail nya dengan menjalankan perintah berikut: </p><pre id="7b514dad-7c25-4764-9f88-d295e0b0e3c2" class="code"><code># instal dulu perl (bahasa pemograman penyusun squirrelmail)
+sudo apt install perl
+
+# membuka file konfigurasi bawaan dari squirrelmail
+sudo perl /var/www/mail/squirrelmail/config/conf.pl</code></pre><p id="7d93e487-7879-4b01-81f2-4eb039d002bf" class=""><mark class="highlight-orange_background">Lalu, akan ada pop up bash permintaan configurasi oleh squirrelmail, begini cara mengisinya:</mark></p><ol type="1" id="0f4bc0d7-0368-469a-a16f-246547c2ed38" class="numbered-list" start="1"><li>Nanti akan diberikan penjelasan awal, tinggal ketik <em><span style="border-bottom:0.05em solid"><strong>2,</strong></span></em> lalu tekan enter<figure id="815895b6-420f-4f79-a6ef-5a9d807af890" class="image" style="text-align:center"><a href="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%202.png"><img style="width:384px" src="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%202.png"/></a><figcaption>ketik angka ‘2’ lalu kalian tekan enter brow buat ke next step</figcaption></figure></li></ol><ol type="1" id="b5d48ad5-74b5-4b3b-b4e7-1c61242db30e" class="numbered-list" start="2"><li>Nah, kalian akan masuk ke Server Settings, sekarang ikuti langkah pada gambar dibawah ini:<figure id="22acb627-20b1-40f9-a986-656fe2f91948" class="image" style="text-align:center"><a href="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%203.png"><img style="width:384px" src="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%203.png"/></a><figcaption>ketik angka ‘1’ lalu kalian teken enter brow buat ke next step</figcaption></figure><figure id="6c98adca-1129-4cd7-93ef-0c7784a76e35" class="image" style="text-align:center"><a href="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%204.png"><img style="width:384px" src="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%204.png"/></a><figcaption>lalu kalian tuliskan domain name yang telah kalian add tadi sebelumnya di /etc/hosts, setelah itu teken enter deh.</figcaption></figure><figure id="a11f3922-0955-4920-8f4a-3768b12c73c6" class="image" style="text-align:center"><a href="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%205.png"><img style="width:384px" src="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%205.png"/></a><figcaption>kalian tinggal ketik ‘R’ lalu enter untuk kembali ke main menu</figcaption></figure></li></ol><ol type="1" id="dbc9b7fb-b347-4925-8d78-50145d3f3d34" class="numbered-list" start="3"><li>Lalu, kita akan masuk ke menu General Settings untuk mengedit folder path data dan attach:<figure id="8b545ae0-8372-4256-9abe-a7cf88c3fb81" class="image" style="text-align:center"><a href="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%206.png"><img style="width:384px" src="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%206.png"/></a><figcaption>ketik angka ‘4’ lalu kalian teken enter brow buat ke next step</figcaption></figure><figure id="d6274749-1000-490e-9eae-a90295783f13" class="image" style="text-align:center"><a href="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%207.png"><img style="width:384px" src="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%207.png"/></a><figcaption>ketik angka ‘1’ lalu kalian teken enter brow buat ke next step</figcaption></figure><figure id="005bfe93-1f17-491a-bbe1-bc97de232320" class="image" style="text-align:center"><a href="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%208.png"><img style="width:384px" src="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%208.png"/></a><figcaption>nah sekarang kalian ketik ‘/var/www/mail/squirrelmail/data/’ wajib sesuai ya, kemudian kalian tekan enter</figcaption></figure><figure id="140d29d1-1180-4959-a5d4-e601b72b23f1" class="image" style="text-align:center"><a href="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%209.png"><img style="width:384px" src="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%209.png"/></a><figcaption>ketik angka ‘2’ lalu kalian teken enter brow buat ke next step</figcaption></figure><figure id="5a0d2fec-cb3e-42e6-ab90-d9fd22d7023f" class="image" style="text-align:center"><a href="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%2010.png"><img style="width:384px" src="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%2010.png"/></a><figcaption>nah sekarang kalian ketik ‘/var/www/mail/squirrelmail/attach/’ wajib sesuai ya, kemudian kalian tekan enter</figcaption></figure><figure id="f7966900-98d5-4395-b819-38e1b64a5b04" class="image" style="text-align:center"><a href="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%2011.png"><img style="width:384px" src="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%2011.png"/></a><figcaption>kalian tinggal ketik ‘R’ lalu enter untuk kembali ke main menu</figcaption></figure></li></ol><ol type="1" id="31a1ef37-0a2e-4729-a9e7-1ac827400ed5" class="numbered-list" start="4"><li>Sekarang kita akan simpan semua perubahan yang telah kita lakukan, berikut langkahnya:<figure id="14260fc7-7c99-4cbb-81eb-f31a702791e5" class="image" style="text-align:center"><a href="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%2012.png"><img style="width:384px" src="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%2012.png"/></a><figcaption>kalian tinggal ketik ‘S’ lalu enter untuk menyimpan konfigurasi</figcaption></figure><figure id="2357e3a4-a1fd-4f8e-af1f-a4c3960a80c6" class="image" style="text-align:center"><a href="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%2013.png"><img style="width:384px" src="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%2013.png"/></a><figcaption>terakhir tinggal kalian ketik ‘Q’ lalu enter untuk keluar config</figcaption></figure></li></ol><p id="4b5fe574-f469-450d-b567-927c6b593e70" class="">Dan, kelar deh, konfigurasi Squirrel-Mail beserta konfig apache2 nya selesai diterapkan di device kamu, tapi eits tunggu dulu, squirrelmail belum bisa dijalankan brow, karna versi ubuntu sekarang udah ga support sama squirrel mail, oleh karna itu untuk memfix kasus tersebut sekarang kita akan melakukan langkah konfig kedua, yakni konfigurasi tambahan khusus squirrelmail:</p><h3 id="5af6e3ac-0dba-4032-b950-c839bee8882c" class="">2.1 Konfigurasi Tambahan Khusus Buat Squirrel-Mail di Ubuntu 16.04+</h3><p id="3c080418-318b-41b0-a8f5-38fa03438d12" class="">Sekedar informasi, SquirrelMail akan blank jika langsung kita jalankan, karna squirrel mail sudah tak lagi dikembangkan untuk versi ubuntu 16.04 keatas, dan sudah tak bisa lagi dijalankan pada apache2 dengan versi php7.0 keatas, oleh karna itu, kita perlu melakukan downgrade versi php7.0 keatas menjadi versi php 5.6 khusus buat apache2 nya, berikut caranya:</p><pre id="2343b256-e2d6-4814-b035-c3ab78f3f88c" class="code"><code># add the Ondrej PHP repository to your Ubuntu, This repository contains all the released versions of PHP to date.
+sudo add-apt-repository ppa:ondrej/php
+
+# avoid locale repo adding bug error
+sudo locale-gen id_ID.UTF-8
+
+# install php version 5.6 to your ubuntu
+sudo apt install php5.6
+
+# matikan service php8.1 buat apache, dan hidupkan yang php versi 5.6
+sudo a2dismod php8.1 # cek dulu versi php kita yang akan dimatikan dengan command php -v
+sudo a2enmod php5.6
+
+# restart semua service yang berkaitan dengan squirrelmail
+sudo systemctl restart apache2
+sudo service dovecot restart
+sudo /etc/init.d/apache2 restart
+sudo /etc/init.d/postfix restart</code></pre><p id="1a1d1aab-df52-43e1-9c62-802580d608b2" class="">Yehey, semuanya udah kelar masbro, tinggal kalian akses domain yang kalian buat tadi, kalau dalamSquirrel-Mail sudah tak tersedia lagi di ubuntu versi 16.04 keatas, contoh kasus ini, akses domain <code>mail.hanz.com</code> dan kalian akan melihat tampilan ini:</p><figure id="16082033-54d8-4bd1-96d6-e37e898e8969" class="image"><a href="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%2014.png"><img style="width:1492px" src="Mail%20Server%20Webmail%20Based%2059922b2d24e647a488e8c4113782c45e/Untitled%2014.png"/></a><figcaption>kelar deh cui, kalian tinggal login menggunakan user yang telah kalian buat sebelumnya saat tahapan postfix awal, oleh karna itu sebelum kalian install squirrelmail, kalian perlu menginstall webmail secara local terlebih dahulu seperti yang tertera pada tutorial saya sebelumnya, begitu deh gaes.</figcaption></figure></div></article><span class="sans" style="font-size:14px;padding-top:2em"></span></body></html>
