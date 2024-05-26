@@ -188,3 +188,10 @@ function pauseAudio(audioElement) {
         }
     });
 }
+
+if (localStorage.getItem('qari') === null || localStorage.getItem('selectedQariIndex') === null) {
+    localStorage.setItem('qari', '01'); 
+    localStorage.setItem('selectedQariIndex', 0);
+} else {
+    listSelectQari.selectedIndex = localStorage.getItem('selectedQariIndex');
+}
