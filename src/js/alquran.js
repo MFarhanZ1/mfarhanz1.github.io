@@ -195,3 +195,8 @@ if (localStorage.getItem('qari') === null || localStorage.getItem('selectedQariI
 } else {
     listSelectQari.selectedIndex = localStorage.getItem('selectedQariIndex');
 }
+
+if (localStorage.getItem('isRefresh') === null) {
+    localStorage.setItem('isRefresh', true);
+    location.reload();
+}
