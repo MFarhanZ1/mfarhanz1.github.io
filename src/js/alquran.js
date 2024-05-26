@@ -195,3 +195,23 @@ if (localStorage.getItem('qari') === null || localStorage.getItem('selectedQariI
 } else {
     listSelectQari.selectedIndex = localStorage.getItem('selectedQariIndex');
 }
+
+function applyZoom() {
+    // Mendapatkan lebar layar
+    const screenWidth = window.innerWidth;
+    console.log(screenWidth)
+
+    // Jika lebar layar kurang dari atau sama dengan 800px, zoom out ke 80%
+    if (screenWidth <= 1300) {
+        document.body.style.zoom = "90%";
+    } else {
+        // Reset zoom untuk layar yang lebih besar
+        document.body.style.zoom = "100%";
+    }
+}
+
+// Panggil fungsi saat halaman dimuat
+applyZoom();
+
+// Tambahkan event listener untuk mengubah ukuran jendela
+window.addEventListener('resize', applyZoom);
