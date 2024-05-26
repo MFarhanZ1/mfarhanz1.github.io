@@ -200,6 +200,8 @@ function applyZoom() {
     // Mendapatkan lebar layar
     const screenWidth = window.innerWidth;
 
+    console.log(screenWidth);
+
     // Jika lebar layar kurang dari atau sama dengan 800px, zoom out ke 80%
     if (screenWidth <= 1300) {
         document.body.style.zoom = "90%";

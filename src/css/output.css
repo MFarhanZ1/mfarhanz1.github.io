@@ -652,6 +652,50 @@ video {
   height: 100vh;
 }
 
+.h-96 {
+  height: 24rem;
+}
+
+.h-\[400px\] {
+  height: 400px;
+}
+
+.h-\[800px\] {
+  height: 800px;
+}
+
+.h-\[500px\] {
+  height: 500px;
+}
+
+.h-\[600px\] {
+  height: 600px;
+}
+
+.h-\[700px\] {
+  height: 700px;
+}
+
+.h-\[650px\] {
+  height: 650px;
+}
+
+.h-\[670px\] {
+  height: 670px;
+}
+
+.h-\[690px\] {
+  height: 690px;
+}
+
+.h-\[6980px\] {
+  height: 6980px;
+}
+
+.h-\[685px\] {
+  height: 685px;
+}
+
 .w-0 {
   width: 0px;
 }
@@ -877,9 +921,25 @@ video {
   background-size: cover;
 }
 
+.bg-auto {
+  background-size: auto;
+}
+
+.bg-contain {
+  background-size: contain;
+}
+
 .bg-clip-text {
   -webkit-background-clip: text;
           background-clip: text;
+}
+
+.bg-center {
+  background-position: center;
+}
+
+.bg-bottom {
+  background-position: bottom;
 }
 
 .bg-no-repeat {
@@ -1078,4 +1138,86 @@ video {
 .active\:skew-y-12:active {
   --tw-skew-y: 12deg;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+@media (min-width: 1024px) {
+  .lg\:h-\[\] {
+    height: ;
+  }
+
+  .lg\:h-\[50\] {
+    height: 50;
+  }
+
+  .lg\:h-\[50\%\] {
+    height: 50%;
+  }
+
+  .lg\:h-\[685px\] {
+    height: 685px;
+  }
+
+  .lg\:h-\[585px\] {
+    height: 585px;
+  }
+
+  .lg\:h-\[85px\] {
+    height: 85px;
+  }
+
+  .lg\:h-\[645px\] {
+    height: 645px;
+  }
+
+  .lg\:h-\[665px\] {
+    height: 665px;
+  }
+
+  .lg\:h-\[675px\] {
+    height: 675px;
+  }
+
+  .lg\:h-\[678px\] {
+    height: 678px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .xl\:h-\[\] {
+    height: ;
+  }
+
+  .xl\:h-\[8-\] {
+    height: 8-;
+  }
+
+  .xl\:h-\[8-\%\] {
+    height: 8-%;
+  }
+
+  .xl\:h-\[80\%\] {
+    height: 80%;
+  }
+
+  .xl\:h-\[30\%\] {
+    height: 30%;
+  }
+
+  .xl\:h-\[685px\] {
+    height: 685px;
+  }
+
+  .xl\:bg-cover {
+    background-size: cover;
+  }
+}
+
+@media (min-width: 1536px) {
+  .\32xl\:h-\[80\%\] {
+    height: 80%;
+  }
+
+  .\32xl\:bg-cover {
+    background-size: cover;
+  }
 }
