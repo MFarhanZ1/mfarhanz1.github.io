@@ -1,0 +1,13 @@
+{
+  "name": "e-Quran Indonesia.",
+  "version": "1.2.42",
+  "description": "Baca Al-Quran digital lengkap dengan tafsir, terjemahan bahasa Indonesia, latin, dan doa sehari-hari. Nikmati kemudahan membaca Al-Quran secara online di mana saja.",
+  "scripts": {
+    "tailwind:build": "npx tailwindcss -i ./src/css/input.css -o ./src/css/output.css --watch"
+  },
+  "author": "M. Farhan Aulia Pratama w/ API by equran.id",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
+  }
+}

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="id">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- Metadata biar SEO nya gacor -->
+		<meta
+			name="description"
+			content="Baca Al-Quran digital lengkap dengan tafsir, terjemahan bahasa Indonesia, latin, dan doa sehari-hari. Nikmati kemudahan membaca Al-Quran secara online di mana saja."
+		/>
+		<meta
+			name="keywords"
+			content="Al-Quran, Al-Quran Digital, Tafsir Al-Quran, Terjemahan Al-Quran, Latin Al-Quran, Doa Sehari-Hari, Al-Quran Indonesia, Baca Al-Quran Online"
+		/>
+		<meta name="robots" content="index, follow" />
+
+		<!-- external font -->
+		<link href='../css/fonts.css' rel='stylesheet' type='text/css'>
+
+		<!-- Website properties -->
+		<link
+			rel="website icon"
+			href="../../assets/svgs/pink-solid_book-quran.svg"
+		/>
+		<link href="../css/output.css" rel="stylesheet" />
+		<title>
+			e-Quran Indonesia - Lengkap dengan Latin, Terjemahan, Tafsir, dan Doa
+			Sehari-hari
+		</title>
+	</head>
+	<body
+		class="bg-white-warm bg-cover bg-no-repeat"
+		style="background-image: url('../../assets/pngs/bg-body-2.png')"
+	>
+		<header class="flex py-6 px-10 justify-between items-center">
+			<div class="flex gap-9">
+				<a class="flex items-center gap-3 cursor-pointer" href="./">
+					<img
+						class="h-10"
+						src="../../assets/svgs/pink-solid_book-quran.svg"
+						alt="logo e-Quran Indonesia"
+					/>
+					<h1 class="font-merriweather text-antique-blue font-bold text-2xl">
+						e-Quran Indonesia.
+					</h1>
+				</a>
+
+				<!-- nav divider -->
+				<div class="w-0.5 bg-antique-blue"></div>
+
+				<!-- nav top menu -->
+				<nav class="flex space-x-4 items-center">
+					<!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+					<a
+						href="./al-quran.html"
+						class="text-black hover:underline rounded-md px-3 py-2 text-xl font-bold font-merriweather"
+						aria-current="page"
+						>Al-Quran</a
+					>
+					<a
+						href="./doa.html"
+						class="bg-antique-blue-0.64 text-black rounded-md px-3 py-2 text-xl font-bold font-merriweather"
+
+						>Doa</a
+					>
+				</nav>
+			</div>
+
+			<div class="flex gap-5 items-center">
+				<div
+					class="flex items-center rounded-2xl border-2 border-antique-blue px-3 py-2 gap-2"
+				>
+					<img
+						class="h-8"
+						src="../../assets/svgs/iconamoon_search.svg"
+						alt="search icon"
+					/>
+
+					<input
+						class="text-lg text-antique-blue font-semibold font-merriweather w-96 bg-transparent border-none focus:outline-none placeholder-antique-blue placeholder-opacity-65"
+						type="text"
+						placeholder="cari surah, ayat, ataupun doa..."
+						id="search-field"
+					/>
+				</div>
+				<marquee
+					class="text-antique-blue font-merriweather text-xl font-semibold underline max-w-52"
+					id="islamic-info"
+				>
+				</marquee>
+			</div>
+		</header>
+
+		<!-- divider stroke from header to content -->
+		<div class="h-0.5 bg-antique-blue mx-8"></div>
+
+		<aside></aside>
+
+        <script src="../js/system.js"></script>
+	</body>
+</html>
